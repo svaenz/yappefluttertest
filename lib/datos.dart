@@ -1,31 +1,32 @@
 import 'package:flutter/material.dart';
 import 'core/app_colors.dart';
+import 'perfil.dart';
 
 class DatosPage extends StatelessWidget {
     const DatosPage({super.key});
 
-    Widget _buildItem({ required String titulo, required String val,})
-        {
-            return Column(
+    void goto(BuildContext context) {Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PerfilPage()),);}
+
+    Widget block({ required String titulo, required String val,}) {
+        return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
                 Text(
-                titulo,
-                style: const TextStyle(
-                    color: AppColors.primary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                ),
+                    titulo,
+                    style: const TextStyle(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                    ),
                 ),
                 const SizedBox(height: 4),
                 Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                     Expanded(
-                    child: Text(
-                        val,
+                    child: Text(val,
                         style: const TextStyle(
-                        color: Colors.grey,
+                        color: Colors.black,
                         fontSize: 16,
                         ),
                     ),
@@ -35,7 +36,7 @@ class DatosPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 15),
                 Container(height: 1, color: Color(0xFFDDDDDD)),
-                const SizedBox(height: 15),
+                const SizedBox(height: 15), // espaciado
             ],
             );
         }
@@ -56,28 +57,34 @@ class DatosPage extends StatelessWidget {
                         color: AppColors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
-                    ),
+                        ),
                     ),
                 ),
 
-                // CONTENIDO
                 Expanded(
                     child: SingleChildScrollView(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Column(
+                        
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                        _buildItem(titulo: "Nombres", val: "Usuario Saenz"),
-                        _buildItem(titulo: "Número de celular", val: "*** *** 123"),
-                        _buildItem(titulo: "Correo Electronico",val: "*****abcc@gmail.com"),
-                        _buildItem(titulo: "Número de tarjeta",val: "**** **** **** 1234"),
-                        _buildItem(titulo: "Numero de cuenta",val: "**** ******** 1234"),
-                        _buildItem(titulo: "Número de cuenta Interbancario (CCI)",val: "*** *** ********** 0000"),
+                            block(titulo: "Nombres", val: "Usuario Saenz"),
+                            block(titulo: "Número de celular", val: "*** *** 123"),
+                            block(titulo: "Correo Electronico",val: "*****abcc@gmail.com"),
+                            block(titulo: "Número de tarjeta",val: "**** **** **** 1234"),
+                            block(titulo: "Numero de cuenta",val: "**** ******** 1234"),
+                            block(titulo: "Número de cuenta Interbancario (CCI)",val: "*** *** ********** 0000"),
                         ],
                     ),
                     ),
                 ),
+
+                ElevatedButton(
+                    onPressed: () => goto(context),
+                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary,),
+                    child: const Text("Siguiente",style: TextStyle(color: Colors.white),),
+                ),
+
                 ],
             ),
         );
